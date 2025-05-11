@@ -9,11 +9,14 @@
 3. 为不同角色提供专属视图
 
 ## 建模成果
-用例图
-
-系统顺序图示例(导入设计)
-顺序图示例
-展示设计师与导入设计服务之间的消息交互流程
+### 用户故事
+![用例图](assets/images/userstory.png)
+### 用例图
+![用例图](assets/images/usecase.png)
+### 系统类图
+![用例图](assets/images/classdiagram.png)
+### 需求原型化截图
+![用例图](assets/images/running.png)
 
 ## 模型规模统计
 |  指标项  |  数量  |
