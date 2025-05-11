@@ -1,0 +1,8 @@
+UseCaseModel Work1 {
+
+	Actor Designer("Designer") {
+	}
+
+	Service Work1System {} Service ThirdPartyServices {}}
+DomainModel Work1 {}
+

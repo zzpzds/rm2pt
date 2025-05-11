@@ -1,0 +1,24 @@
+UseCaseModel work1 {
+
+	UC::import
+
+	Actor Designer("Designer") {
+	}
+
+	Actor Developer("Developer") {
+	}
+
+	Service Work1System {
+
+	}
+
+	Service ThirdPartyServices {
+
+	}
+
+}
+
+DomainModel Work1 {
+
+}
+

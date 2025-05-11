@@ -1,0 +1,71 @@
+As a designer, I want to select and upload design drafts to platform, so that all design images are centralized
+{
+	Basic Flow {
+		(User)1. the designer shall opens a file dialog and selects design image.
+		(System)2. the platform shall validates file format.
+		(System)3. the platform shall uploads image to database, generates thumbnail previews, and stores metadata.
+	}
+	Alternative Flow {
+		A. At any time, Invalid file format detected :
+			1. Displays an error message: "Unsupported file format. Please upload PNG, JPG, or SVG.".
+		B. At any time, Upload failure :
+			1. Alerts the user with "Upload failed. Please try again.".
+		C. At any time, File exceeds 50MB limit :
+			1. Shows "File size exceeds limit. Maximum allowed: 500MB.".
+	}
+}
+As a developer, I want to review all design images and select a method to convert images to code
+{
+	Basic Flow {
+		(System)1. The platform displays a paginated list of design images with thumbnails, metadata, and tags.	
+		(System)2. The platform enables filtering/searching by tags, upload date, or designer ID.
+		(User)3. The developer selects a design image.
+		(System)4. The platform provides zoomable high-resolution previews for detailed inspection.
+	}
+	Alternative Flow {
+		A. No design images available:
+			1. Shows a placeholder message: "No designs found. Upload a design first."
+	}
+}
+As a developer, I want to choose between AI-generated code or manual development for the selected design
+{
+	Basic Flow {
+		(User)1. The developer selects a design image.
+		(System)2. Prompts the developer to choose a conversion method:
+			Option 1: AI Auto-Convert (platform generates code).
+			Option 2: Manual Development (download design for manual work).
+		(System)3. For AI mode, the platform allows specifying code preferences (e.g., React, HTML/CSS).
+		(User)4. The developer selects the desired option.
+	}
+	Alternative Flow {
+		A. AI service unavailable:
+			1. Alerts "AI service is temporarily unavailable. Please try manual mode."
+	}
+}
+As a developer, I want the platform to auto-convert the design into code via AI and provide downloadable results
+{
+	Basic Flow {
+		(User)1. The developer selects "AI Auto-Convert".
+		(System)2. Calls an AI conversion service and generates clean, annotated code.
+		(System)3. Validates code integrity and packages it into a ZIP file.
+		(System)4. Triggers a download and logs the activity.
+	}
+	Alternative Flow {
+		A. Low AI confidence score (<90%):
+			1. Warns "Conversion may require manual adjustments. Proceed?"
+		B. Code validation errors:
+			2. Highlights errors (e.g., unsupported elements) and offers retry options.
+	}
+}
+As a developer, I want to download the design image for manual development if I prefer not to use AI
+{
+	Basic Flow {
+		(User)1. The developer selects "Manual Development".
+		(System)2. Provides the original design image as a downloadable file (PNG/JPG/SVG).
+		(System)3. Auto-extracts design assets (e.g., icons, fonts) into a folder.
+	}
+	Alternative Flow {
+		A. Image corruption detected:
+			1. Alerts "Image file is corrupted. Please re-upload the design."
+	}
+}

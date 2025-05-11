@@ -1,0 +1,13 @@
+UseCaseModel Work1 {
+
+	UC::Upload Design
+
+	Actor Designer("Designer") {
+	}
+
+	Actor Actor2 {
+	}
+
+	Service Work1System {} Service ThirdPartyServices {}}
+DomainModel Work1 {}
+

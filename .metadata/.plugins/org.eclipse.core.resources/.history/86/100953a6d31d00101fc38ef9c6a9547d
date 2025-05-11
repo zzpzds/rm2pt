@@ -1,0 +1,282 @@
+UseCaseModel Work1 {
+
+	UC::import_Design definedBySSD(Import_DesignSSD) relatedService(Import_DesignService)
+	UC::preview_Design definedBySSD(Preview_DesignSSD) relatedService(Preview_DesignService)
+	UC::preview_Design_Designer extend preview_Design definedBySSD(Preview_Design_DesignerSSD) relatedService(Preview_Design_DesignerService)
+	UC::preview_Design_Developer extend preview_Design definedBySSD(Preview_Design_DeveloperSSD) relatedService(Preview_Design_DeveloperService)
+	UC::export_Design include ai_Convert, image_Download definedBySSD(Export_DesignSSD) relatedService(Export_DesignService)
+	UC::ai_Convert definedBySSD(AI_ConvertSSD) relatedService(AI_ConvertService)
+	UC::image_Download definedBySSD(Image_DownloadSSD) relatedService(Image_DownloadService)
+
+	Actor Designer {
+		import_Design
+		preview_Design_Designer
+	}
+
+	Actor Developer {
+		export_Design
+		preview_Design_Developer
+	}
+
+	Interaction Import_DesignSSD {
+
+		[Participants: Designer Import_DesignService]
+
+		CallMessage::Import_DesignSSDCallMessage1(upload_image Import_DesignSSDCallMessage1SendingEnd -> Import_DesignSSDExecution1StartEnd)
+		ReturnMessage::Import_DesignSSDCallMessage1Return(Import_DesignSSDExecution1FinishEnd -> Import_DesignSSDCallMessage1ReturnReceivingEnd Import_DesignSSDCallMessage1)
+
+		Execution::Import_DesignSSDExecution1(Import_DesignService Import_DesignSSDExecution1StartEnd Import_DesignSSDExecution1FinishEnd)
+
+		MessageEnd::Import_DesignSSDCallMessage1SendingEnd(Designer Import_DesignSSDCallMessage1)
+		ExecutionEnd::Import_DesignSSDExecution1StartEnd(Import_DesignService Import_DesignSSDExecution1)
+		ExecutionEnd::Import_DesignSSDExecution1FinishEnd(Import_DesignService Import_DesignSSDExecution1)
+		MessageEnd::Import_DesignSSDCallMessage1ReturnReceivingEnd(Designer Import_DesignSSDCallMessage1Return)
+
+	}
+
+	Interaction Preview_Design_DesignerSSD {
+
+		[Participants: Designer Preview_Design_DesignerService]
+
+		CallMessage::Preview_Design_DesignerSSDCallMessage1(preview_list Preview_Design_DesignerSSDCallMessage1SendingEnd -> Preview_Design_DesignerSSDExecution1StartEnd)
+		ReturnMessage::Preview_Design_DesignerSSDCallMessage1Return(Preview_Design_DesignerSSDExecution1FinishEnd -> Preview_Design_DesignerSSDCallMessage1ReturnReceivingEnd Preview_Design_DesignerSSDCallMessage1)
+
+		Execution::Preview_Design_DesignerSSDExecution1(Preview_Design_DesignerService Preview_Design_DesignerSSDExecution1StartEnd Preview_Design_DesignerSSDExecution1FinishEnd)
+
+		MessageEnd::Preview_Design_DesignerSSDCallMessage1SendingEnd(Designer Preview_Design_DesignerSSDCallMessage1)
+		ExecutionEnd::Preview_Design_DesignerSSDExecution1StartEnd(Preview_Design_DesignerService Preview_Design_DesignerSSDExecution1)
+		ExecutionEnd::Preview_Design_DesignerSSDExecution1FinishEnd(Preview_Design_DesignerService Preview_Design_DesignerSSDExecution1)
+		MessageEnd::Preview_Design_DesignerSSDCallMessage1ReturnReceivingEnd(Designer Preview_Design_DesignerSSDCallMessage1Return)
+
+	}
+
+	Interaction Preview_DesignSSD {
+
+		[Participants: Designer Developer Preview_DesignService]
+
+		CallMessage::Preview_DesignSSDCallMessage1(preview_design_list Preview_DesignSSDCallMessage1SendingEnd -> Preview_DesignSSDExecution1StartEnd)
+		ReturnMessage::Preview_DesignSSDCallMessage1Return(Preview_DesignSSDExecution1FinishEnd -> Preview_DesignSSDCallMessage1ReturnReceivingEnd Preview_DesignSSDCallMessage1)
+		CallMessage::Preview_DesignSSDCallMessage3(preview_develop_list Preview_DesignSSDCallMessage3SendingEnd -> Preview_DesignSSDExecution2StartEnd)
+		ReturnMessage::Preview_DesignSSDCallMessage3Return(Preview_DesignSSDExecution2FinishEnd -> Preview_DesignSSDCallMessage3ReturnReceivingEnd Preview_DesignSSDCallMessage3)
+
+		Execution::Preview_DesignSSDExecution1(Preview_DesignService Preview_DesignSSDExecution1StartEnd Preview_DesignSSDExecution1FinishEnd)
+		Execution::Preview_DesignSSDExecution2(Preview_DesignService Preview_DesignSSDExecution2StartEnd Preview_DesignSSDExecution2FinishEnd)
+
+		MessageEnd::Preview_DesignSSDCallMessage1SendingEnd(Designer Preview_DesignSSDCallMessage1)
+		ExecutionEnd::Preview_DesignSSDExecution1StartEnd(Preview_DesignService Preview_DesignSSDExecution1)
+		ExecutionEnd::Preview_DesignSSDExecution1FinishEnd(Preview_DesignService Preview_DesignSSDExecution1)
+		MessageEnd::Preview_DesignSSDCallMessage1ReturnReceivingEnd(Designer Preview_DesignSSDCallMessage1Return)
+		MessageEnd::Preview_DesignSSDCallMessage3SendingEnd(Developer Preview_DesignSSDCallMessage3)
+		ExecutionEnd::Preview_DesignSSDExecution2StartEnd(Preview_DesignService Preview_DesignSSDExecution2)
+		ExecutionEnd::Preview_DesignSSDExecution2FinishEnd(Preview_DesignService Preview_DesignSSDExecution2)
+		MessageEnd::Preview_DesignSSDCallMessage3ReturnReceivingEnd(Developer Preview_DesignSSDCallMessage3Return)
+
+	}
+
+	Interaction Export_DesignSSD {
+
+		[Participants: Developer Export_DesignService]
+
+		CallMessage::Export_DesignSSDCallMessage1(fetch_design_info Export_DesignSSDCallMessage1SendingEnd -> Export_DesignSSDExecution1StartEnd)
+		ReturnMessage::Export_DesignSSDCallMessage1Return(Export_DesignSSDExecution1FinishEnd -> Export_DesignSSDCallMessage1ReturnReceivingEnd Export_DesignSSDCallMessage1)
+
+		Execution::Export_DesignSSDExecution1(Export_DesignService Export_DesignSSDExecution1StartEnd Export_DesignSSDExecution1FinishEnd)
+
+		MessageEnd::Export_DesignSSDCallMessage1SendingEnd(Developer Export_DesignSSDCallMessage1)
+		ExecutionEnd::Export_DesignSSDExecution1StartEnd(Export_DesignService Export_DesignSSDExecution1)
+		ExecutionEnd::Export_DesignSSDExecution1FinishEnd(Export_DesignService Export_DesignSSDExecution1)
+		MessageEnd::Export_DesignSSDCallMessage1ReturnReceivingEnd(Developer Export_DesignSSDCallMessage1Return)
+
+	}
+
+	Interaction AI_ConvertSSD {
+
+		[Participants: Developer AI_ConvertService]
+
+		CallMessage::AI_ConvertSSDCallMessage1(design_to_code AI_ConvertSSDCallMessage1SendingEnd -> AI_ConvertSSDExecution1StartEnd)
+		ReturnMessage::AI_ConvertSSDCallMessage1Return(AI_ConvertSSDExecution1FinishEnd -> AI_ConvertSSDCallMessage1ReturnReceivingEnd AI_ConvertSSDCallMessage1)
+
+		Execution::AI_ConvertSSDExecution1(AI_ConvertService AI_ConvertSSDExecution1StartEnd AI_ConvertSSDExecution1FinishEnd)
+
+		MessageEnd::AI_ConvertSSDCallMessage1SendingEnd(Developer AI_ConvertSSDCallMessage1)
+		ExecutionEnd::AI_ConvertSSDExecution1StartEnd(AI_ConvertService AI_ConvertSSDExecution1)
+		ExecutionEnd::AI_ConvertSSDExecution1FinishEnd(AI_ConvertService AI_ConvertSSDExecution1)
+		MessageEnd::AI_ConvertSSDCallMessage1ReturnReceivingEnd(Developer AI_ConvertSSDCallMessage1Return)
+
+	}
+
+	Interaction Image_DownloadSSD {
+
+		[Participants: Developer Image_DownloadService]
+
+		CallMessage::Image_DownloadSSDCallMessage1(download_image Image_DownloadSSDCallMessage1SendingEnd -> Image_DownloadSSDExecution1StartEnd)
+		ReturnMessage::Image_DownloadSSDCallMessage1Return(Image_DownloadSSDExecution1FinishEnd -> Image_DownloadSSDCallMessage1ReturnReceivingEnd Image_DownloadSSDCallMessage1)
+
+		Execution::Image_DownloadSSDExecution1(Image_DownloadService Image_DownloadSSDExecution1StartEnd Image_DownloadSSDExecution1FinishEnd)
+
+		MessageEnd::Image_DownloadSSDCallMessage1SendingEnd(Developer Image_DownloadSSDCallMessage1)
+		ExecutionEnd::Image_DownloadSSDExecution1StartEnd(Image_DownloadService Image_DownloadSSDExecution1)
+		ExecutionEnd::Image_DownloadSSDExecution1FinishEnd(Image_DownloadService Image_DownloadSSDExecution1)
+		MessageEnd::Image_DownloadSSDCallMessage1ReturnReceivingEnd(Developer Image_DownloadSSDCallMessage1Return)
+
+	}
+
+	Interaction Preview_Design_DeveloperSSD {
+
+		[Participants: Developer Preview_Design_DeveloperService]
+
+		CallMessage::Preview_Design_DeveloperSSDCallMessage1(preview_todo_code Preview_Design_DeveloperSSDCallMessage1SendingEnd -> Preview_Design_DeveloperSSDExecution1StartEnd)
+		ReturnMessage::Preview_Design_DeveloperSSDCallMessage1Return(Preview_Design_DeveloperSSDExecution1FinishEnd -> Preview_Design_DeveloperSSDCallMessage1ReturnReceivingEnd Preview_Design_DeveloperSSDCallMessage1)
+
+		Execution::Preview_Design_DeveloperSSDExecution1(Preview_Design_DeveloperService Preview_Design_DeveloperSSDExecution1StartEnd Preview_Design_DeveloperSSDExecution1FinishEnd)
+
+		MessageEnd::Preview_Design_DeveloperSSDCallMessage1SendingEnd(Developer Preview_Design_DeveloperSSDCallMessage1)
+		ExecutionEnd::Preview_Design_DeveloperSSDExecution1StartEnd(Preview_Design_DeveloperService Preview_Design_DeveloperSSDExecution1)
+		ExecutionEnd::Preview_Design_DeveloperSSDExecution1FinishEnd(Preview_Design_DeveloperService Preview_Design_DeveloperSSDExecution1)
+		MessageEnd::Preview_Design_DeveloperSSDCallMessage1ReturnReceivingEnd(Developer Preview_Design_DeveloperSSDCallMessage1Return)
+
+	}
+
+	Service Work1System {
+
+	}
+
+	Service ThirdPartyServices {
+
+	}
+
+	Service Import_DesignService {
+
+		[Operation]
+		upload_image(file)
+
+	}
+
+	Service Preview_Design_DesignerService {
+
+		[Operation]
+		preview_list()
+
+	}
+
+	Service Preview_DesignService {
+
+		[Operation]
+		preview_design_list()
+		preview_develop_list()
+
+	}
+
+	Service Export_DesignService {
+
+		[Operation]
+		fetch_design_info(design_id)
+
+	}
+
+	Service AI_ConvertService {
+
+		[Operation]
+		design_to_code(design_id)
+
+	}
+
+	Service Image_DownloadService {
+
+		[Operation]
+		download_image(design_id)
+
+	}
+
+	Service Preview_Design_DeveloperService {
+
+		[Operation]
+		preview_todo_code()
+
+	}
+
+	Contract Import_DesignService::upload_image(image :String) : Boolean {
+
+		/* precondition: skeleton */
+		precondition:
+			true
+
+		/* postcondition: skeleton */
+		postcondition:
+			self.DesignImage.FileUrl = image
+	}
+
+	Contract Preview_Design_DeveloperService::preview_todo_code() : Real {
+
+		/* precondition: skeleton */
+		precondition:
+			true
+
+		/* postcondition: skeleton */
+		postcondition:
+			result = self.DesignImage
+	}
+
+	Contract Image_DownloadService::download_image(id :String) : Real {
+
+		/* precondition: skeleton */
+		precondition:
+			true
+
+		/* postcondition: skeleton */
+		postcondition:
+			result = self.DesignImage.FileUrl
+	}
+
+}
+
+DomainModel Work1 {
+
+	Entity Designer {
+		UserId : String
+		Name : String
+		Type : UserType[DESIGNER|DEVELOPER]
+
+		[Refer]
+		DesignertoDesignList : DesignList Association
+		DesignertoMessage : Message* Association
+	}
+
+	Entity DesignImage {
+		DesignId : String
+		FileUrl : String
+		DesignStatus : DesignStatus[VNIT|DONE|DOING]
+		Id : String
+	}
+
+	Entity Developer {
+		UserId : String
+		Name : String
+		Type : UserType[ENUMITEMS]
+
+		[Refer]
+		DevelopertoDesignList : DesignList Association
+		DevelopertoAIProcess : AIProcess Association
+	}
+
+	Entity Message {
+		Title : String
+		Content : String
+		Id : String
+	}
+
+	Entity AIProcess {
+		DesignId : String
+		Result : String
+	}
+
+	Entity DesignList {
+		List : String
+		Type : DesignListType[DESIGNER|DEVELOPER]
+
+		[Refer]
+		DesignListtoDesignImage : DesignImage* Association
+	}
+
+}
+

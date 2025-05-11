@@ -1,0 +1,8 @@
+UseCaseModel Work1 {
+
+	Actor Actor1 {
+	}
+
+	Service Work1System {} Service ThirdPartyServices {}}
+DomainModel Work1 {}
+

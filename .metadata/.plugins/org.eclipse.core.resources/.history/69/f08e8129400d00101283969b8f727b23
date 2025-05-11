@@ -1,0 +1,2 @@
+UseCaseModel Work1 {Service Work1System {} Service ThirdPartyServices {}}
+DomainModel Work1 {}
